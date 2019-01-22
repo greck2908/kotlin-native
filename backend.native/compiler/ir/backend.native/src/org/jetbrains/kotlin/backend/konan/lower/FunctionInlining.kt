@@ -151,7 +151,7 @@ internal class FunctionInlining(val context: Context): IrElementTransformerWithC
         if (!callSite.descriptor.needsInlining)
             return callSite
         val functionDescriptor = callSite.descriptor.resolveFakeOverride().original
-        if (callSite.symbol == context.ir.symbols.isInitializedGetter)
+        if (callSite.symbol == context.ir.symbols.lateinitIsInitializedPropertyGetter)
             return callSite
 
         val callee = getFunctionDeclaration(functionDescriptor)
