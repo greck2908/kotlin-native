@@ -80,12 +80,6 @@ internal class KonanLower(val context: Context, val parentPhaser: PhaseManager) 
         phaser.phase(KonanPhase.LOWER_STRING_CONCAT) {
             StringConcatenationLowering(context).lower(irFile)
         }
-        phaser.phase(KonanPhase.LOWER_DATA_CLASSES) {
-            DataClassOperatorsLowering(context).runOnFilePostfix(irFile)
-        }
-        phaser.phase(KonanPhase.LOWER_FOR_LOOPS) {
-            ForLoopsLowering(context).lower(irFile)
-        }
         phaser.phase(KonanPhase.LOWER_ENUM_CONSTRUCTORS) {
             EnumConstructorsLowering(context).run(irFile)
         }
@@ -102,18 +96,21 @@ internal class KonanLower(val context: Context, val parentPhaser: PhaseManager) 
         phaser.phase(KonanPhase.LOWER_TAILREC) {
             TailrecLowering(context).runOnFilePostfix(irFile)
         }
-        phaser.phase(KonanPhase.LOWER_FINALLY) {
-            FinallyBlocksLowering(context).lower(irFile)
-        }
         phaser.phase(KonanPhase.LOWER_DEFAULT_PARAMETER_EXTENT) {
             DefaultArgumentStubGenerator(context).runOnFilePostfix(irFile)
             KonanDefaultParameterInjector(context).lower(irFile)
         }
+        phaser.phase(KonanPhase.LOWER_INNER_CLASSES) {
+            InnerClassLowering(context).runOnFilePostfix(irFile)
+        }
+        phaser.phase(KonanPhase.LOWER_FOR_LOOPS) {
+            ForLoopsLowering(context).lower(irFile)
+        }
         phaser.phase(KonanPhase.LOWER_BUILTIN_OPERATORS) {
             BuiltinOperatorLowering(context).lower(irFile)
         }
-        phaser.phase(KonanPhase.LOWER_INNER_CLASSES) {
-            InnerClassLowering(context).runOnFilePostfix(irFile)
+        phaser.phase(KonanPhase.LOWER_FINALLY) {
+            FinallyBlocksLowering(context).lower(irFile)
         }
         phaser.phase(KonanPhase.TEST_PROCESSOR) {
             TestProcessor(context).process(irFile)
@@ -126,6 +123,9 @@ internal class KonanLower(val context: Context, val parentPhaser: PhaseManager) 
         }
         phaser.phase(KonanPhase.LOWER_CALLABLES) {
             CallableReferenceLowering(context).lower(irFile)
+        }
+        phaser.phase(KonanPhase.LOWER_DATA_CLASSES) {
+            DataClassOperatorsLowering(context).runOnFilePostfix(irFile)
         }
         phaser.phase(KonanPhase.LOWER_INTEROP_PART2) {
             InteropLoweringPart2(context).lower(irFile)
