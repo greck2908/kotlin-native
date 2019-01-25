@@ -105,7 +105,6 @@ internal val ClassDescriptor.isInterface: Boolean
     get() = (this.kind == ClassKind.INTERFACE)
 
 fun ClassDescriptor.isAbstract() = this.modality == Modality.SEALED || this.modality == Modality.ABSTRACT
-        || this.kind == ClassKind.ENUM_CLASS
 
 internal fun FunctionDescriptor.hasValueTypeAt(index: Int): Boolean {
     when (index) {

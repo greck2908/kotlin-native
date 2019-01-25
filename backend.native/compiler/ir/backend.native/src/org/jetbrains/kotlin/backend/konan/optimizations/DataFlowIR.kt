@@ -488,7 +488,7 @@ internal object DataFlowIR {
             }, data = null)
         }
 
-        private fun ClassDescriptor.isFinal() = modality == Modality.FINAL && kind != ClassKind.ENUM_CLASS
+        private fun ClassDescriptor.isFinal() = modality == Modality.FINAL
 
         fun mapClassReferenceType(descriptor: ClassDescriptor, eraseLocalObjects: Boolean = true): Type {
             // Do not try to devirtualize ObjC classes.

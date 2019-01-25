@@ -132,7 +132,7 @@ val IrFunction.isOverridableOrOverrides
     get() = this is IrSimpleFunction && (this.isOverridable || this.overriddenSymbols.isNotEmpty())
 
 val IrClass.isFinalClass: Boolean
-    get() = modality == Modality.FINAL && kind != ClassKind.ENUM_CLASS
+    get() = modality == Modality.FINAL
 
 fun IrSimpleFunction.overrides(other: IrSimpleFunction): Boolean {
     if (this == other) return true
