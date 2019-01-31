@@ -110,7 +110,7 @@ task konanJsonReport {
         String benchContents = new File("${buildDir.absolutePath}/${nativeBenchResults}").text
         def properties = getCommonProperties() + ['type'           : 'native',
                                                   'compilerVersion': "${konanVersion}".toString(),
-                                                  'flags'          : kotlin.targets.native.compilations.main.extraOpts.collect{ '"' + it + '"'},
+                                                  'flags'          : kotlin.targets.native.compilations.main.extraOpts.collect{ "\"$it\"" },
                                                   'benchmarks'     : benchContents,
                                                   'compileTime'    : nativeCompileTime,
                                                   'codeSize'       : MPPTools.getCodeSizeBenchmark(applicationName, nativeExecutable) ]
